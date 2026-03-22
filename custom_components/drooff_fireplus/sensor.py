@@ -297,6 +297,11 @@ class FireplusWeightSensor(FireplusEntity, SensorEntity):
         self.suggested_display_precision = 1
 
     @property
+    def available(self) -> bool | None:
+        """Return the availability of the sensor."""
+        return self.coordinator.data.weight is not None and self.coordinator.data.weight > 0.0
+
+    @property
     def native_value(self) -> int | None:
         """Return the native value of the sensor."""
         return self.coordinator.data.weight
